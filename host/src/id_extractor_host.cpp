@@ -8,7 +8,7 @@
 #include "CL/opencl.h"
 #include "AOCLUtils/aocl_utils.h"
 
-namespace aocl_utils{
+using namespace aocl_utils;
 
 // OpenCL Setup
 cl_platform_id platform = NULL;
@@ -27,13 +27,12 @@ ulong chip_id_host;
 bool setup(char* aocx_file);
 void cleanup();
 
-int main(){
-
+int main() {
   cl_int status;
   cl_event kernel_event;
   char *bitstream = "id_extractor";
 
-  if(!setup(bitstream)) {
+  if (!setup(bitstream)) {
     return -1;
   }
 
@@ -47,7 +46,7 @@ int main(){
   status = clEnqueueTask(queue, kernel, 0, NULL, &kernel_event);
   checkError(status, "Failed to launch kernel");
 
-  clWaitForEvents(cl_uint(1), &kernel_event); // wait for kernels to end
+  clWaitForEvents(cl_uint(1), &kernel_event);  // wait for kernels to end
   clReleaseEvent(kernel_event);
 
   // Read output
@@ -61,7 +60,7 @@ int main(){
   return 0;
 }
 
-bool setup(char* aocx_file){
+bool setup(char* aocx_file) {
   cl_int status;
 
   printf("AOCX FILE: %s\n", aocx_file);
@@ -72,7 +71,7 @@ bool setup(char* aocx_file){
 
   // Get the OpenCL platform.
   platform = findPlatform("Altera");
-  if(platform == NULL) {
+  if (platform == NULL) {
       printf("ERROR: Unable to find Altera OpenCL platform.\n");
       return false;
   }
@@ -113,24 +112,23 @@ bool setup(char* aocx_file){
   return true;
 }
 
-void cleanup(){
+void cleanup() {
   /*
   Release all memory objects
   */
-  if(kernel) {
+  if (kernel) {
       clReleaseKernel(kernel);
   }
-  if(queue) {
+  if (queue) {
       clReleaseCommandQueue(queue);
   }
-  if(chip_id_buf) {
+  if (chip_id_buf) {
       clReleaseMemObject(chip_id_buf);
   }
-  if(program) {
+  if (program) {
       clReleaseProgram(program);
   }
-  if(context) {
+  if (context) {
       clReleaseContext(context);
   }
 }
-} // namespace

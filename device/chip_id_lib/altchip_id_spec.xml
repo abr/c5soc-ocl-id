@@ -7,14 +7,14 @@
            properly handle incoming stalls (because it simply ignores its stall/valid inputs). If set
            to "no", the function must properly handle stall/valid signals.
            IS_STALL_FREE="yes" requires IS_FIXED_LATENCY="yes". -->
-      <IS_STALL_FREE value="no"/>
+      <IS_STALL_FREE value="yes"/>
 
       <!-- If the function always takes known number of clock cycles (specified by EXPECTED_LATENCY)
            to compute its output, set IS_FIXED_LATENCY to "yes".
            Note that IS_FIXED_LATENCY could be "yes" while IS_STALL_FREE="no". Such a function would
            produce its output in fixed number of cycles but could still deal with stall signals
            properly.  -->
-      <IS_FIXED_LATENCY value="no"/>
+      <IS_FIXED_LATENCY value="yes"/>
 
       <!-- Expected latency of this function. If IS_FIXED_LATENCY="yes", this is the number of
            pipeline stages inside the function. In this case, EXPECTED_LATENCY must be set exactly

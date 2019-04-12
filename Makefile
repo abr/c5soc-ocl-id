@@ -89,7 +89,7 @@ lib :
 		device/chip_id_lib/altchip_id.aoco -v
 
 hw :
-	aoc --board de1soc_sharedonly -v -l chip_id_lib.aoclib \
-	-L device/chip_id_lib device/id_extractor.cl -o bin/id_extractor.aocx
+	aoc --board de1soc_sharedonly --report -v -l chip_id_lib.aoclib \
+		-L device/chip_id_lib device/id_extractor.cl -o bin/id_extractor.aocx
 
 .PHONY : all clean

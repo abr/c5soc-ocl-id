@@ -49,12 +49,12 @@ module  altchip_id
 	input	clock;
 	output	[63:0]	chip_id;
 	output	data_valid;
-	input	resetn,
+	input	resetn;
 
 	//not using these but required for OCL library
-	input	ivalid,
-	output	oready,
-	input	iready,
+	input	ivalid;
+	output	oready;
+	input	iready;
 	input 	[7:0] idummy;
 
 	parameter	DEVICE_FAMILY	= "Cyclone V";
