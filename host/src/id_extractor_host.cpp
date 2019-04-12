@@ -21,7 +21,7 @@ cl_kernel kernel;
 cl_mem chip_id_buf;
 
 // Data pointer for passing data between host/device
-ulong chip_id_host;
+unsigned long long chip_id_host;  // 64b
 
 // Function prototypes
 bool setup(char* aocx_file);
@@ -52,8 +52,10 @@ int main() {
   // Read output
   printf("Reading ID from buffer...\n");
   status = clEnqueueReadBuffer(
-    queue, chip_id_buf, 1, 0, 8, &chip_id_host, 0, 0, 0);
+    queue, chip_id_buf, CL_TRUE, 0, 8, &chip_id_host, 0, 0, 0);
   checkError(status, "Failed to chip ID from buffer");
+
+  printf("Got Unique Chip ID: 0x%016X\n", chip_id_host);
 
   // printf("Found unique chip ID: 0x%016X", chip_id_host);
   cleanup();
@@ -104,7 +106,6 @@ bool setup(char* aocx_file) {
   checkError(status, "Failed to create kernel");
 
   // Create buffer for reading
-  // CL_MEM_ALLOC_HOST_PTR flag allocates shared memory
   chip_id_buf = clCreateBuffer(
       context, CL_MEM_WRITE_ONLY, 8, NULL, &status);
   checkError(status, "Failed to create buffer for chip_id");
