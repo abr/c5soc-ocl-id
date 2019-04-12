@@ -2,4 +2,6 @@ device/chip_id_lib/*
 !altchip_id.cl
 !altchip_id.v
 !altchip_id_spec.xml
-bin
+bin/*
+!id_extractor_host
+!id_extractor.aocx

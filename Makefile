@@ -54,7 +54,7 @@ endif
 CXX := arm-linux-gnueabihf-g++
 
 # Target
-TARGET := chip_id_host
+TARGET := id_extractor_host
 TARGET_DIR := bin
 
 # Directories
