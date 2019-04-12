@@ -49,9 +49,10 @@ module  altchip_id
 	input	clock;
 	output	[63:0]	chip_id;
 	output	data_valid;
-	input	resetn;
+	input	resetn;  // Switched to resetn from reset
 
-	//not using these but required for OCL library
+	// Not using these but OpenCL library requires full
+	// Avalon streaming interface, including input
 	input	ivalid;
 	output	oready;
 	input	iready;
@@ -89,7 +90,7 @@ module  altchip_id
 
 	// clkin and reset input
 	assign clkin_wire = clock;
-	assign reset_wire = !resetn;
+	assign reset_wire = !resetn;  // Not OpenCL lib interface uses resetn!
 	assign oready = 1'b1;
 
 	// busy_reg to indicate read id operation is in progress

@@ -1,10 +1,18 @@
+/*
+Copyright (c) 2013-2019 Applied Brain Research Inc.
+
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
+EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
+MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT.
+IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM,
+DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT,
+TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE
+OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
+
+Ben Morcos
+2019-04-12
+*/
 #include <stdio.h>
-#include <math.h>
-#include <iostream>
-#include <errno.h>
-#include <fcntl.h>
-#include <string.h>
-#include <unistd.h>
 #include "CL/opencl.h"
 #include "AOCLUtils/aocl_utils.h"
 
@@ -55,9 +63,8 @@ int main() {
     queue, chip_id_buf, CL_TRUE, 0, 8, &chip_id_host, 0, 0, 0);
   checkError(status, "Failed to chip ID from buffer");
 
-  printf("Got Unique Chip ID: 0x%016X\n", chip_id_host);
+  printf("Got unique chip ID: 0x%016X\n", chip_id_host);
 
-  // printf("Found unique chip ID: 0x%016X", chip_id_host);
   cleanup();
   return 0;
 }
@@ -78,26 +85,24 @@ bool setup(char* aocx_file) {
       return false;
   }
 
-  // get device
+  // Get device
   device.reset(getDevices(platform, CL_DEVICE_TYPE_ALL, &n_devices));
 
-  // get context
+  // Get context
   context = clCreateContext(
       NULL, 1, device, &oclContextCallback, NULL, &status);
   checkError(status, "Failed to create context");
 
-  // create program
+  // Create program
   std::string binary_file = getBoardBinaryFile(aocx_file, device[0]);
   program = createProgramFromBinary(context, binary_file.c_str(), device, 1);
 
-  // build the program
+  // Build the program
   status = clBuildProgram(
-    program, 0, NULL, "-cl-fast-relaxed-math", NULL, NULL);
+    program, 0, NULL, NULL, NULL, NULL);
   checkError(status, "Failed to build program");
 
   // Create OpenCL objects
-  // Out of Order queues not supported, so need two command queues to run
-  // two kernels concurrently
   queue = clCreateCommandQueue(
     context, device[0], CL_QUEUE_PROFILING_ENABLE, &status);
   checkError(status, "Failed to create command queue");
