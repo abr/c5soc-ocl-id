@@ -1,0 +1,12 @@
+Copyright (c) 2013-2019 Applied Brain Research Inc.
+
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
+
+Licensed code
+=============
+
+The OpenCL library is a wrapper around the Intel provided
+`Unique Chip ID core <https://www.intel.com/content/dam/www/programmable/us/en/pdfs/literature/ug/altchipid.pdf>`_.
+
+The OpenCL application relies on the Intel provided AOCLUtils libraries
+and runtime.
