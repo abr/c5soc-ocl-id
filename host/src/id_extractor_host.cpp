@@ -16,7 +16,7 @@ Ben Morcos
 #include "CL/opencl.h"
 #include "AOCLUtils/aocl_utils.h"
 
-using namespace aocl_utils;
+namespace aocl_utils{
 
 // OpenCL Setup
 cl_platform_id platform = NULL;
@@ -29,20 +29,12 @@ cl_kernel kernel;
 cl_mem chip_id_buf;
 
 // Data pointer for passing data between host/device
-unsigned long long chip_id_host;  // 64b
+typedef unsigned long long uint64;
+uint64 chip_id_host;  // 64b
 
-// Function prototypes
-bool setup(char* aocx_file);
-void cleanup();
-
-int main() {
+extern "C" uint64 get_id() {
   cl_int status;
   cl_event kernel_event;
-  char *bitstream = "id_extractor";
-
-  if (!setup(bitstream)) {
-    return -1;
-  }
 
   // Set kernel arg
   unsigned argi = 0;
@@ -63,13 +55,15 @@ int main() {
     queue, chip_id_buf, CL_TRUE, 0, 8, &chip_id_host, 0, 0, 0);
   checkError(status, "Failed to chip ID from buffer");
 
-  printf("Got unique chip ID: 0x%016X\n", chip_id_host);
-
-  cleanup();
-  return 0;
+  return chip_id_host;
 }
 
-bool setup(char* aocx_file) {
+extern "C" bool setup(char* aocx_file) {
+  /*
+
+  `aocx_file` - full path to *.aocx omitting the extension
+      eg. "/home/root/single_pes"
+  */
   cl_int status;
 
   printf("AOCX FILE: %s\n", aocx_file);
@@ -118,7 +112,7 @@ bool setup(char* aocx_file) {
   return true;
 }
 
-void cleanup() {
+extern "C" void cleanup() {
   /*
   Release all memory objects
   */
@@ -138,3 +132,4 @@ void cleanup() {
       clReleaseContext(context);
   }
 }
+} // namespace

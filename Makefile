@@ -71,11 +71,11 @@ host : $(TARGET_DIR)/$(TARGET)
 
 # Host executable target.
 $(TARGET_DIR)/$(TARGET) : Makefile $(SRCS) $(INCS) $(TARGET_DIR)
-	$(ECHO)$(CXX) $(CPPFLAGS) $(CXXFLAGS) -fPIC $(foreach D,$(INC_DIRS),-I$D) \
+	$(ECHO)$(CXX) $(CPPFLAGS) $(CXXFLAGS) -shared -fPIC $(foreach D,$(INC_DIRS),-I$D) \
 			$(AOCL_COMPILE_CONFIG) $(SRCS) $(AOCL_LINK_CONFIG) \
 			$(foreach D,$(LIB_DIRS),-L$D) \
 			$(foreach L,$(LIBS),-l$L) \
-			-o $(TARGET_DIR)/$(TARGET)
+			-o $(TARGET_DIR)/$(TARGET).so
 
 $(TARGET_DIR) :
 	$(ECHO)mkdir $(TARGET_DIR)
