@@ -4,5 +4,5 @@ device/chip_id_lib/*
 !altchip_id_spec.xml
 !chip_id_lib.aoclib
 bin/*
-!id_extractor_host
+!id_extractor_host.so
 !id_extractor.aocx
