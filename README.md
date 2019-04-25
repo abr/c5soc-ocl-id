@@ -42,6 +42,9 @@ Unique Chip ID.
 In the ``host/src`` directory there is the ``id_extractor_host.cpp``
 host code.
 
+Note the ``library`` branch compiles the host code to a shared library for
+use with other applications.
+
 ### Test it out
 
 In the ``bin`` directory you will find the compiled host code,
