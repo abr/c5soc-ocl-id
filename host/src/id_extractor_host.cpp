@@ -63,7 +63,7 @@ int main() {
     queue, chip_id_buf, CL_TRUE, 0, 8, &chip_id_host, 0, 0, 0);
   checkError(status, "Failed to chip ID from buffer");
 
-  printf("Got unique chip ID: 0x%016X\n", chip_id_host);
+  printf("Got unique chip ID: 0x%016llX\n", chip_id_host);
 
   cleanup();
   return 0;
