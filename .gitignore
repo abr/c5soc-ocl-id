@@ -2,6 +2,7 @@ device/chip_id_lib/*
 !altchip_id.cl
 !altchip_id.v
 !altchip_id_spec.xml
+!chip_id_lib.aoclib
 bin/*
 !id_extractor_host
 !id_extractor.aocx

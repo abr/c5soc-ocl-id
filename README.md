@@ -21,11 +21,12 @@ create the OpenCL library:
   communicate the expected behaviour to the OpenCL compiler.
 - ``altchip_id.cl``: A simple behavioural model of the verilog function
   that allows for simulation of the OpenCL code.
+- ``chip_id_lib.aoclib``: The built OpenCL library.
 
 
 To use the OpenCL library in other applications, you will need these 3
-source files and the packaged ``aoclib`` file available to be compiled
-with your new application. The generated ``aoclib`` file is described in more
+source files and the packaged library file.
+The generated ``aoclib`` file is described in more
 detail below in [Building From Source](#building-from-source).
 
 
